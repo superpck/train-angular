@@ -7,7 +7,8 @@
       </a>
     </div>
     <div class="header-nav">
-      <a href="javascript://" [routerLink]="['/main/main-page']" class="active nav-link"><span class="nav-text">Dashboard</span></a>
+      <a href="javascript://" [routerLink]="['/main/main-page']" class="active nav-link"><span
+          class="nav-text">Dashboard</span></a>
       <a href="javascript://" [routerLink]="['/main/about']" class="nav-link"><span class="nav-text">About</span></a>
     </div>
     <div class="header-actions">
@@ -17,5 +18,19 @@
     </div>
   </header>
 
-  <router-outlet></router-outlet>
+  <div class="content-container">
+    <clr-vertical-nav>
+      <a clrVerticalNavLink routerLink="./charmander" routerLinkActive="active">Charmander</a>
+      <a clrVerticalNavLink routerLink="./jigglypuff" routerLinkActive="active">Jigglypuff</a>
+      <a clrVerticalNavLink routerLink="./pikachu" routerLinkActive="active">Pikachu</a>
+      <a clrVerticalNavLink routerLink="./raichu" routerLinkActive="active">Raichu</a>
+      <a clrVerticalNavLink routerLink="./snorlax" routerLinkActive="active">Snorlax</a>
+      <div class="nav-divider"></div>
+      <a clrVerticalNavLink routerLink="./credit" routerLinkActive="active">Credit</a>
+    </clr-vertical-nav>
+    <div class="content-area">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
 </clr-main-container>
