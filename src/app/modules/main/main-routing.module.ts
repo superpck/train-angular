@@ -13,6 +13,9 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
+        path: '', component: MainPageComponent
+      },
+      {
         path: 'main-page', component: MainPageComponent
       },
       {
