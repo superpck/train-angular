@@ -19,7 +19,10 @@
     <clr-dg-cell>{{row.login.username}}</clr-dg-cell>
 
     <clr-dg-row-detail *clrIfExpanded>
-      {{ row.phone }}
+      โทร. {{ row.phone }}
+      <div>
+        <img [src]="row.picture.large" alt="">
+      </div>
     </clr-dg-row-detail>
 
   </clr-dg-row>
