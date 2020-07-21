@@ -8,6 +8,8 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class UserIndexComponent implements OnInit {
   users: any = [];
+  currentUser: any = {};
+  editUser: any = {};
   loading = false;
 
   constructor(
@@ -27,5 +29,9 @@ export class UserIndexComponent implements OnInit {
       this.users = [];
     }
     this.loading = false;
+  }
+
+  async onEdit(row) {
+    this.editUser = Object.assign({}, row);
   }
 }

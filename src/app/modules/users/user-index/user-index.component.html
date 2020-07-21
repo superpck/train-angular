@@ -1,13 +1,11 @@
 <h1>ทะเบียนผู้ใช้งาน</h1>
 
-<clr-datagrid [clrDgLoading]="loading">
+<clr-datagrid [clrDgLoading]="loading" [(clrDgSingleSelected)]="currentUser" [clrDgRowSelection]="true">
   <clr-dg-column [clrDgField]="'name.first'">ชื่อ</clr-dg-column>
   <clr-dg-column>เพศ</clr-dg-column>
   <clr-dg-column [clrDgField]="'email'">email</clr-dg-column>
   <clr-dg-column [clrDgField]="'login.username'">username</clr-dg-column>
-
   <clr-dg-row *clrDgItems="let row of users" [clrDgItem]="row">
-
     <clr-dg-action-overflow>
       <button class="action-item" (click)="onEdit(row)">Edit</button>
       <button class="action-item" (click)="onDelete(row)">Delete</button>
@@ -19,7 +17,9 @@
     <clr-dg-cell>{{row.login.username}}</clr-dg-cell>
 
     <clr-dg-row-detail *clrIfExpanded>
-      โทร. {{ row.phone }}
+      <div class="row">
+        โทร. {{ row.phone }}
+      </div>
       <div>
         <img [src]="row.picture.large" alt="">
       </div>
