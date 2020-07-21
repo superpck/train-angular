@@ -7,6 +7,7 @@ import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainModule } from './modules/main/main.module';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { UsersModule } from './modules/users/users.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     AppRoutingModule,
     ClarityModule,
     BrowserAnimationsModule,
-    MainModule
+    MainModule, UsersModule
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy }
