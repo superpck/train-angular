@@ -8,6 +8,7 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class UserIndexComponent implements OnInit {
   users: any = [];
+  loading = false;
 
   constructor(
     private userService: UsersService
@@ -18,11 +19,13 @@ export class UserIndexComponent implements OnInit {
   }
 
   async getUser() {
+    this.loading = true;
     const result: any = await this.userService.getUser();
     if (result['results']) {
       this.users = result['results'];
     } else {
       this.users = [];
     }
+    this.loading = false;
   }
 }

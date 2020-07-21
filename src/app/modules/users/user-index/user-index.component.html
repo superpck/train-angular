@@ -1,22 +1,33 @@
 <h1>ทะเบียนผู้ใช้งาน</h1>
 
-<clr-datagrid>
+<clr-datagrid [clrDgLoading]="loading">
   <clr-dg-column [clrDgField]="'name.first'">ชื่อ</clr-dg-column>
-  <clr-dg-column [clrDgField]="'gender'">เพศ</clr-dg-column>
+  <clr-dg-column>เพศ</clr-dg-column>
   <clr-dg-column [clrDgField]="'email'">email</clr-dg-column>
   <clr-dg-column [clrDgField]="'login.username'">username</clr-dg-column>
 
-  <clr-dg-row *clrDgItems="let row of users">
-    <clr-dg-cell>{{row.name.title}}{{row.name.first}} {{row.name.last}}</clr-dg-cell>
+  <clr-dg-row *clrDgItems="let row of users" [clrDgItem]="row">
+
+    <clr-dg-action-overflow>
+      <button class="action-item" (click)="onEdit(row)">Edit</button>
+      <button class="action-item" (click)="onDelete(row)">Delete</button>
+    </clr-dg-action-overflow>
+
+    <clr-dg-cell>{{row.name.title}} {{row.name.first}} {{row.name.last}}</clr-dg-cell>
     <clr-dg-cell>{{row.gender}}</clr-dg-cell>
     <clr-dg-cell>{{row.email}}</clr-dg-cell>
     <clr-dg-cell>{{row.login.username}}</clr-dg-cell>
+
+    <clr-dg-row-detail *clrIfExpanded>
+      {{ row.phone }}
+    </clr-dg-row-detail>
+
   </clr-dg-row>
   <clr-dg-footer>
     <clr-dg-pagination #pagination [clrDgPageSize]="10">
-      <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">Users per page</clr-dg-page-size>
+      <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">rows per page</clr-dg-page-size>
       {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
-      of {{pagination.totalItems}} users
+      of {{pagination.totalItems}} rows
     </clr-dg-pagination>
   </clr-dg-footer>
 </clr-datagrid>
