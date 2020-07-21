@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-index.component.scss']
 })
 export class UserIndexComponent implements OnInit {
-
+  users: any = [];
+  
   constructor() { }
 
   ngOnInit(): void {

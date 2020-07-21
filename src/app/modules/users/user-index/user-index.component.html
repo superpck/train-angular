@@ -1,1 +1,16 @@
-<p>user-index works!</p>
+<h1>ทะเบียนผู้ใช้งาน</h1>
+
+<clr-datagrid>
+  <clr-dg-column [clrDgField]="'col1Prop'">Col1Name</clr-dg-column>
+  <clr-dg-column [clrDgField]="'col2Prop'">Col2Name</clr-dg-column>
+  <clr-dg-column [clrDgField]="'col3Prop'">Col3Name</clr-dg-column>
+  <clr-dg-column [clrDgField]="'col4Prop'">Col4Name</clr-dg-column>
+
+  <clr-dg-row *clrDgItems="let row of users">
+    <clr-dg-cell>{{row.col1Prop}}</clr-dg-cell>
+    <clr-dg-cell>{{row.col2Prop}}</clr-dg-cell>
+    <clr-dg-cell>{{row.col3Prop}}</clr-dg-cell>
+    <clr-dg-cell>{{row.col4Prop}}</clr-dg-cell>
+  </clr-dg-row>
+
+</clr-datagrid>
