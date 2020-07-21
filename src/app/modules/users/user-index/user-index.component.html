@@ -1,16 +1,16 @@
 <h1>ทะเบียนผู้ใช้งาน</h1>
 
 <clr-datagrid>
-  <clr-dg-column [clrDgField]="'col1Prop'">Col1Name</clr-dg-column>
-  <clr-dg-column [clrDgField]="'col2Prop'">Col2Name</clr-dg-column>
-  <clr-dg-column [clrDgField]="'col3Prop'">Col3Name</clr-dg-column>
-  <clr-dg-column [clrDgField]="'col4Prop'">Col4Name</clr-dg-column>
+  <clr-dg-column [clrDgField]="'name.first'">ชื่อ</clr-dg-column>
+  <clr-dg-column [clrDgField]="'gender'">เพศ</clr-dg-column>
+  <clr-dg-column [clrDgField]="'email'">email</clr-dg-column>
+  <clr-dg-column [clrDgField]="'login.username'">username</clr-dg-column>
 
   <clr-dg-row *clrDgItems="let row of users">
-    <clr-dg-cell>{{row.col1Prop}}</clr-dg-cell>
-    <clr-dg-cell>{{row.col2Prop}}</clr-dg-cell>
-    <clr-dg-cell>{{row.col3Prop}}</clr-dg-cell>
-    <clr-dg-cell>{{row.col4Prop}}</clr-dg-cell>
+    <clr-dg-cell>{{row.name.title}}{{row.name.first}} {{row.name.last}}</clr-dg-cell>
+    <clr-dg-cell>{{row.gender}}</clr-dg-cell>
+    <clr-dg-cell>{{row.email}}</clr-dg-cell>
+    <clr-dg-cell>{{row.login.username}}</clr-dg-cell>
   </clr-dg-row>
 
 </clr-datagrid>
