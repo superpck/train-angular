@@ -11,6 +11,7 @@ export class UserIndexComponent implements OnInit {
   currentUser: any = {};
   editUser: any = {};
   loading = false;
+  modalEdit = false;
 
   constructor(
     private userService: UsersService
@@ -33,6 +34,7 @@ export class UserIndexComponent implements OnInit {
 
   async onEdit(row) {
     this.editUser = Object.assign({}, row);
+    this.modalEdit = true;
   }
 
   async onDelete(row) {
