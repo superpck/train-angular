@@ -62,7 +62,7 @@ export class AlertService {
     } else if (text && text.code) {
       return text.code
     } else {
-      return text ? JSON.stringify(text) : '';
+      return text;
     }
   }
 }

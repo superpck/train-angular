@@ -51,6 +51,10 @@ export class UserIndexComponent implements OnInit {
   }
 
   async onDelete(row) {
+    const answer = await this.alert.confirm(row.name.title + row.name.first + ' ' + row.name.last, 'ยืนยันการลบข้อมูล?');
+    if (answer.value) {
+      this.alert.success('', 'ลบเรียบร้อย');
+    }
 
   }
 }
