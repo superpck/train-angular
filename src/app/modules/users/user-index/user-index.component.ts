@@ -33,14 +33,15 @@ export class UserIndexComponent implements OnInit {
     this.loading = false;
   }
 
-  async onEdit(row: any) {
-    this.editUser = row;
+  async onEdit(row) {
+    this.editUser = await Object.assign({}, row);
     this.editUser.dob.date = moment(this.editUser.dob.date).format('YYYY-MM-DD');
     this.modalEdit = true;
   }
 
   async onSave() {
     console.log(this.editUser);
+    this.currentUser = this.editUser;
     this.modalEdit = false;
   }
 
