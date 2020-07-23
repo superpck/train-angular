@@ -10,6 +10,7 @@ import { MainModule } from './modules/main/main.module';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { UsersModule } from './modules/users/users.module';
 import { UsersService } from './services/users.service';
+import { AlertService } from './services/alert.service';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { UsersService } from './services/users.service';
   ],
   providers: [
     UsersService,
+    AlertService,
     { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]

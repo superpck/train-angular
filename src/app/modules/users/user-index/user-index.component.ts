@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 import * as moment from 'moment';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-user-index',
@@ -15,7 +16,8 @@ export class UserIndexComponent implements OnInit {
   modalEdit = false;
 
   constructor(
-    private userService: UsersService
+    private userService: UsersService,
+    private alert: AlertService
   ) { }
 
   ngOnInit(): void {
@@ -40,9 +42,12 @@ export class UserIndexComponent implements OnInit {
   }
 
   async onSave() {
-    console.log(this.editUser);
-    this.currentUser = this.editUser;
-    this.modalEdit = false;
+    const answer = await this.alert.confirm('', 'ยืนยันการบันทึก?');
+    if (answer.value) {
+      console.log(this.editUser);
+      this.currentUser = this.editUser;
+      this.modalEdit = false;
+    }
   }
 
   async onDelete(row) {
