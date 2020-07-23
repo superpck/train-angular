@@ -39,6 +39,11 @@ export class UserIndexComponent implements OnInit {
     this.modalEdit = true;
   }
 
+  async onSave() {
+    console.log(this.editUser);
+    this.modalEdit = false;
+  }
+
   async onDelete(row) {
 
   }
