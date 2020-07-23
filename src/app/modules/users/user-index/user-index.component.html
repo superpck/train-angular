@@ -44,20 +44,37 @@
 <clr-modal [(clrModalOpen)]="modalEdit" [clrModalSize]="'lg'" [clrModalStaticBackdrop]="true"
   [clrModalClosable]="false">
   <h3 class="modal-title">แก้ไข User</h3>
-  <div class="modal-body">
+  <div *ngIf="editUser && editUser.name" class="modal-body">
 
     <form clrForm>
       <clr-input-container>
         <label>คำนำหน้า</label>
         <input clrInput type="text" [(ngModel)]="editUser.name.title" name="title" />
       </clr-input-container>
+
       <clr-input-container>
         <label>ชื่อ</label>
         <input clrInput type="text" [(ngModel)]="editUser.name.first" name="first" />
       </clr-input-container>
+
       <clr-input-container>
         <label>นามสกุล</label>
         <input clrInput type="text" [(ngModel)]="editUser.name.last" name="last" />
+      </clr-input-container>
+
+      <clr-input-container>
+        <label>email</label>
+        <input clrInput type="text" [(ngModel)]="editUser.email" name="email" />
+      </clr-input-container>
+
+      <clr-input-container>
+        <label>วันเกิด</label>
+        <input clrInput type="date" [(ngModel)]="editUser.dob.date" name="dob" />
+      </clr-input-container>
+
+      <clr-input-container>
+        <label>โทร.</label>
+        <input clrInput type="text" [(ngModel)]="editUser.phone" name="phone" />
       </clr-input-container>
     </form>
 

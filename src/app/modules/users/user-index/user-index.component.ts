@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-user-index',
@@ -32,8 +33,9 @@ export class UserIndexComponent implements OnInit {
     this.loading = false;
   }
 
-  async onEdit(row) {
+  async onEdit(row: any) {
     this.editUser = row;
+    this.editUser.dob.date = moment(this.editUser.dob.date).format('YYYY-MM-DD');
     this.modalEdit = true;
   }
 
