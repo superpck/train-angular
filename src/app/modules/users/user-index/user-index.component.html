@@ -41,13 +41,30 @@
   </clr-dg-footer>
 </clr-datagrid>
 
-<clr-modal [(clrModalOpen)]="modalEdit" [clrModalSize]="'lg'" [clrModalStaticBackdrop]="true" [clrModalClosable]="false">
+<clr-modal [(clrModalOpen)]="modalEdit" [clrModalSize]="'lg'" [clrModalStaticBackdrop]="true"
+  [clrModalClosable]="false">
   <h3 class="modal-title">แก้ไข User</h3>
   <div class="modal-body">
-      <p></p>
+
+    <form clrForm>
+      <clr-input-container>
+        <label>คำนำหน้า</label>
+        <input clrInput type="text" [(ngModel)]="editUser.name.title" name="title" />
+      </clr-input-container>
+      <clr-input-container>
+        <label>ชื่อ</label>
+        <input clrInput type="text" [(ngModel)]="editUser.name.first" name="first" />
+      </clr-input-container>
+      <clr-input-container>
+        <label>นามสกุล</label>
+        <input clrInput type="text" [(ngModel)]="editUser.name.last" name="last" />
+      </clr-input-container>
+    </form>
+
+
   </div>
   <div class="modal-footer">
-      <button type="button" class="btn btn-outline">บันทึก</button>
-      <button type="button" class="btn btn-primary" (click)="modalEdit = false">x Close</button>
+    <button type="button" class="btn btn-outline">บันทึก</button>
+    <button type="button" class="btn btn-primary" (click)="modalEdit = false">x Close</button>
   </div>
 </clr-modal>

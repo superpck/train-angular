@@ -33,7 +33,7 @@ export class UserIndexComponent implements OnInit {
   }
 
   async onEdit(row) {
-    this.editUser = Object.assign({}, row);
+    this.editUser = row;
     this.modalEdit = true;
   }
 
