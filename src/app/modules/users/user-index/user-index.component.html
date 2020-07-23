@@ -17,12 +17,16 @@
     <clr-dg-cell>{{row.login.username}}</clr-dg-cell>
 
     <clr-dg-row-detail *clrIfExpanded>
-      <div class="row">
-        โทร. {{ row.phone }}
-      </div>
-      <div>
-        <img [src]="row.picture.large" alt="">
-      </div>
+      <table class="table">
+        <tr>
+          <td class="table-title">โทร.</td>
+          <td class="table-content">{{ row.phone }}</td>
+        </tr>
+        <tr>
+          <td class="table-title"></td>
+          <td class="table-content"><img [src]="row.picture.large" alt=""></td>
+        </tr>
+      </table>
     </clr-dg-row-detail>
 
   </clr-dg-row>
