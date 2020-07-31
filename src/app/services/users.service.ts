@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class UsersService {
 
   constructor(
+    @Inject('APIURL') private api,
     private http: HttpClient
   ) { }
 
@@ -14,4 +15,10 @@ export class UsersService {
     return this.http.get('https://randomuser.me/api/?results=100')
       .toPromise();
   }
+
+  login(username, password) {
+    return this.http.post(this.api + '/users/login', { username, password }).toPromise();
+  }
+
+
 }
