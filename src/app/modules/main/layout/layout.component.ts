@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { MainService } from 'src/app/services/main.service';
 
 @Component({
   selector: 'app-layout',
@@ -7,10 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutComponent implements OnInit {
   demoCollapsible = true;
+  userInfo: any = {};
 
-  constructor() { }
+  constructor(
+    private route: Router,
+    private mainService: MainService
+  ) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.userInfo = await this.mainService.checkToken();
+    console.log(this.userInfo);
   }
 
 }

@@ -11,11 +11,20 @@
           class="nav-text">Dashboard</span></a>
       <a href="javascript://" [routerLink]="['/main/about']" class="nav-link"><span class="nav-text">About</span></a>
     </div>
+
     <div class="header-actions">
-      <a href="..." class="nav-link nav-icon" aria-label="settings">
-        <clr-icon shape="cog"></clr-icon>
-      </a>
+      <clr-dropdown>
+        <button class="nav-text" clrDropdownTrigger aria-label="open user profile">
+          {{ userInfo.fullname }}
+          <clr-icon shape="caret down"></clr-icon>
+        </button>
+        <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+          <a href="..." clrDropdownItem>Preferences</a>
+          <a href="..." clrDropdownItem>Log out</a>
+        </clr-dropdown-menu>
+      </clr-dropdown>
     </div>
+
   </header>
 
   <div class="content-container">
