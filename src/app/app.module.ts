@@ -12,6 +12,7 @@ import { UsersModule } from './modules/users/users.module';
 import { UsersService } from './services/users.service';
 import { AlertService } from './services/alert.service';
 import { LoginModule } from './modules/login/login.module';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { LoginModule } from './modules/login/login.module';
   providers: [
     UsersService,
     AlertService,
+    { provide: 'APIURL', useValue: environment.apiUrl },
     { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]
