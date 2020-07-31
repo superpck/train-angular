@@ -11,6 +11,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { UsersModule } from './modules/users/users.module';
 import { UsersService } from './services/users.service';
 import { AlertService } from './services/alert.service';
+import { LoginModule } from './modules/login/login.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AlertService } from './services/alert.service';
     ClarityModule,
     BrowserAnimationsModule,
     MainModule, UsersModule,
-    HttpClientModule
+    HttpClientModule,
+    LoginModule
   ],
   providers: [
     UsersService,
