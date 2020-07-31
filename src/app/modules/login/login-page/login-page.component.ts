@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 import { Router } from '@angular/router';
+import { MainService } from 'src/app/services/main.service';
 
 @Component({
   selector: 'app-login-page',
@@ -13,6 +14,7 @@ export class LoginPageComponent implements OnInit {
 
   constructor(
     private usersService: UsersService,
+    private mainService: MainService,
     private route: Router
   ) { }
 
@@ -23,9 +25,10 @@ export class LoginPageComponent implements OnInit {
   async login() {
     if (this.username && this.password) {
       const result: any = await this.usersService.login(this.username, this.password);
-      console.log(result);
+
       if (result.statusCode == 200) {
-        sessionStorage.setItem('myAppToken', result.token);
+        const tokenName = await this.mainService.tokenName;
+        sessionStorage.setItem(tokenName, result.token);
         this.route.navigate(['/main']);
       } else {
         alert('login fail!!');

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { MainService } from 'src/app/services/main.service';
 
 @Component({
@@ -12,13 +11,11 @@ export class LayoutComponent implements OnInit {
   userInfo: any = {};
 
   constructor(
-    private route: Router,
     private mainService: MainService
   ) { }
 
   async ngOnInit() {
     this.userInfo = await this.mainService.checkToken();
-    console.log(this.userInfo);
   }
 
 }
