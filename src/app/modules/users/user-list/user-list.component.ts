@@ -33,6 +33,9 @@ export class UserListComponent implements OnInit {
   }
 
   async onSave(){
+    const saveResult: any = await this.usersService.saveUsers(this.currentUser);
+    console.log(saveResult);
+    this.modalEdit = false;
   }
 
   async getUser(){
