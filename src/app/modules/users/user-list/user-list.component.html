@@ -32,12 +32,25 @@
 <clr-modal [(clrModalOpen)]="modalEdit" [clrModalSize]="'lg'">
   <h3 class="modal-title">Use detail</h3>
   <div *ngIf="currentUser" class="modal-body">
-    username: <input type="text" name="username" [(ngModel)]="currentUser.username">
 
-    <br>
-    name: <input type="text" name="prename" [(ngModel)]="currentUser.prename">
-    <input type="text" name="fname" [(ngModel)]="currentUser.fname">
-    <input type="text" name="lname" [(ngModel)]="currentUser.lname">
+    <form clrForm>
+      <clr-input-container>
+        <label>username:</label>
+        <input clrInput type="text" [(ngModel)]="currentUser.username" name="username" />
+      </clr-input-container>
+      <clr-input-container>
+        <label>Prename</label>
+        <input clrInput type="text" [(ngModel)]="currentUser.prename" name="prename" />
+      </clr-input-container>
+      <clr-input-container>
+        <label>ชื่อ</label>
+        <input clrInput type="text" [(ngModel)]="currentUser.fname" name="fname" />
+      </clr-input-container>
+      <clr-input-container>
+        <label>สกุล</label>
+        <input clrInput type="text" [(ngModel)]="currentUser.lname" name="lname" />
+      </clr-input-container>
+    </form>
 
     <br>email: <input type="text" name="email" [(ngModel)]="currentUser.email">
     <br>โทร สนง.: <input type="text" name="tel_office" [(ngModel)]="currentUser.tel_office">
@@ -49,7 +62,7 @@
 
   </div>
   <div class="modal-footer">
-      <button type="button" class="btn btn-outline" (click)="onSave()">บันทึก</button>
-      <button type="button" class="btn btn-primary-outline" (click)="modalEdit = false">x ปิด</button>
+    <button type="button" class="btn btn-outline" (click)="onSave()">บันทึก</button>
+    <button type="button" class="btn btn-primary-outline" (click)="modalEdit = false">x ปิด</button>
   </div>
 </clr-modal>
