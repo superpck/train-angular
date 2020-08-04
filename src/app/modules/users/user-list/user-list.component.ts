@@ -33,6 +33,7 @@ export class UserListComponent implements OnInit {
   }
 
   async onSave(){
+    delete this.currentUser.password;
     const saveResult: any = await this.usersService.saveUsers(this.currentUser);
     console.log(saveResult);
     this.modalEdit = false;
