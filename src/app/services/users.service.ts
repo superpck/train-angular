@@ -28,5 +28,11 @@ export class UsersService {
       .toPromise();
   }
 
+  async saveUsers(data) {
+    const headers: any = await this.mainService.getHttpHeader();
+    return this.http.post(this.api + '/users/save', { data }, { headers })
+      .toPromise();
+  }
+
 
 }
