@@ -24,6 +24,8 @@ export class UserListComponent implements OnInit {
 
   async onEdit(row){
     this.currentUser = Object.assign({}, row);
+    this.currentUser.password = '';
+
     console.log(this.currentUser);
     this.modalEdit = true;
   }
@@ -33,10 +35,14 @@ export class UserListComponent implements OnInit {
   }
 
   async onSave(){
-    delete this.currentUser.password;
+    if (!this.currentUser.password) {
+      delete this.currentUser.password;
+    }
+
     const saveResult: any = await this.usersService.saveUsers(this.currentUser);
     console.log(saveResult);
     this.modalEdit = false;
+    await this.getUser();
   }
 
   async getUser(){
