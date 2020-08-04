@@ -1,1 +1,18 @@
 <p>user-list works!</p>
+
+
+
+<clr-datagrid>
+    <clr-dg-column [clrDgField]="'username'">Username</clr-dg-column>
+    <clr-dg-column [clrDgField]="'fname'">ชื่อ-สกุล</clr-dg-column>
+    <clr-dg-column [clrDgField]="'email'">email</clr-dg-column>
+    <clr-dg-column [clrDgField]="'tel_mobile'">โทร</clr-dg-column>
+
+    <clr-dg-row *clrDgItems="let item of usersList">
+        <clr-dg-cell>{{item.username}}</clr-dg-cell>
+        <clr-dg-cell>{{item.prename}}{{item.fname}} {{item.lname}}</clr-dg-cell>
+        <clr-dg-cell>{{item.email}}</clr-dg-cell>
+        <clr-dg-cell>{{item.tel_mobile}}</clr-dg-cell>
+    </clr-dg-row>
+
+</clr-datagrid>

@@ -9,6 +9,7 @@ import { UsersService } from 'src/app/services/users.service';
 export class UserListComponent implements OnInit {
   searchColumn = '';
   searchValue = '';
+  usersList: any = [];
 
   constructor(
     private usersService: UsersService
@@ -21,5 +22,10 @@ export class UserListComponent implements OnInit {
   async getUser(){
     const result: any = await this.usersService.getUsers(this.searchColumn, this.searchValue);
     console.log(result);
+    if (result.statusCode == 200) {
+      this.usersList = result.rows;
+    } else {
+      this.usersList = [];
+    }
   }
 }
