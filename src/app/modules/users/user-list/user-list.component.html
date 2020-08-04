@@ -2,17 +2,54 @@
 
 
 
-<clr-datagrid>
-    <clr-dg-column [clrDgField]="'username'">Username</clr-dg-column>
-    <clr-dg-column [clrDgField]="'fname'">ชื่อ-สกุล</clr-dg-column>
-    <clr-dg-column [clrDgField]="'email'">email</clr-dg-column>
-    <clr-dg-column [clrDgField]="'tel_mobile'">โทร</clr-dg-column>
+<clr-datagrid [clrDgLoading]="loading">
+  <clr-dg-column [clrDgField]="'username'">Username</clr-dg-column>
+  <clr-dg-column [clrDgField]="'fname'">ชื่อ-สกุล</clr-dg-column>
+  <clr-dg-column [clrDgField]="'email'">email</clr-dg-column>
+  <clr-dg-column [clrDgField]="'tel_mobile'">โทร</clr-dg-column>
 
-    <clr-dg-row *clrDgItems="let item of usersList">
-        <clr-dg-cell>{{item.username}}</clr-dg-cell>
-        <clr-dg-cell>{{item.prename}}{{item.fname}} {{item.lname}}</clr-dg-cell>
-        <clr-dg-cell>{{item.email}}</clr-dg-cell>
-        <clr-dg-cell>{{item.tel_mobile}}</clr-dg-cell>
-    </clr-dg-row>
+  <clr-dg-row *clrDgItems="let item of usersList" [clrDgItem]="item">
+    <clr-dg-action-overflow>
+      <button class="action-item" (click)="onEdit(item)">Edit</button>
+      <button class="action-item" (click)="onDelete(item)">Delete</button>
+    </clr-dg-action-overflow>
+    <clr-dg-cell>{{item.username}}</clr-dg-cell>
+    <clr-dg-cell>{{item.prename}}{{item.fname}} {{item.lname}}</clr-dg-cell>
+    <clr-dg-cell>{{item.email}}</clr-dg-cell>
+    <clr-dg-cell>{{item.tel_mobile}}</clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgPageSize]="10">
+      <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">Users per page</clr-dg-page-size>
+      {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+      of {{pagination.totalItems}} users
+    </clr-dg-pagination>
+  </clr-dg-footer>
 
 </clr-datagrid>
+
+<clr-modal [(clrModalOpen)]="modalEdit" [clrModalSize]="'lg'">
+  <h3 class="modal-title">Use detail</h3>
+  <div *ngIf="currentUser" class="modal-body">
+    username: <input type="text" name="username" [(ngModel)]="currentUser.username">
+
+    <br>
+    name: <input type="text" name="prename" [(ngModel)]="currentUser.prename">
+    <input type="text" name="fname" [(ngModel)]="currentUser.fname">
+    <input type="text" name="lname" [(ngModel)]="currentUser.lname">
+
+    <br>email: <input type="text" name="email" [(ngModel)]="currentUser.email">
+    <br>โทร สนง.: <input type="text" name="tel_office" [(ngModel)]="currentUser.tel_office">
+    <br>โทร มือถือ: <input type="text" name="tel_mobile" [(ngModel)]="currentUser.tel_mobile">
+    <br>วันที่เริ่มใช้งาน: <input type="date" name="date_valid" [(ngModel)]="currentUser.date_valid">
+    <br>วันที่สิ้นสุดการใช้งาน: <input type="date" name="date_expire" [(ngModel)]="currentUser.date_expire">
+
+    <br>Password: <input type="password" name="password" [(ngModel)]="currentUser.password">
+
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-outline" (click)="onSave()">บันทึก</button>
+      <button type="button" class="btn btn-primary" (click)="modalEdit = false">x ปิด</button>
+  </div>
+</clr-modal>
