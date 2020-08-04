@@ -34,5 +34,11 @@ export class UsersService {
       .toPromise();
   }
 
+  async deleteUsers(uid) {
+    const headers: any = await this.mainService.getHttpHeader();
+    return this.http.delete(this.api + '/users/delete/' + uid, { headers })
+      .toPromise();
+  }
+
 
 }
