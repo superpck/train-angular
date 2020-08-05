@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 import { Router } from '@angular/router';
 import { MainService } from 'src/app/services/main.service';
+import { ToastrService } from 'ngx-toastr';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-login-page',
@@ -15,7 +17,9 @@ export class LoginPageComponent implements OnInit {
   constructor(
     private usersService: UsersService,
     private mainService: MainService,
-    private route: Router
+    private route: Router,
+    private toast: ToastrService,
+    private alert: AlertService
   ) { }
 
   ngOnInit(): void {
@@ -29,9 +33,10 @@ export class LoginPageComponent implements OnInit {
       if (result.statusCode == 200) {
         const tokenName = await this.mainService.tokenName;
         sessionStorage.setItem(tokenName, result.token);
+        this.toast.success('', 'ยินดีต้อนรับ');
         this.route.navigate(['/main']);
       } else {
-        alert('login fail!!');
+        this.alert.error(result.message, 'Login fail!');
       }
     }
   }

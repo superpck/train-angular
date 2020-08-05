@@ -1,6 +1,14 @@
 <p>user-list works!</p>
 
 
+ค้นหา
+<select name="searchColumn" [(ngModel)]="searchColumn">
+  <option value="fname">ชื่อ</option>
+  <option value="lname">สกุล</option>
+  <option value="tel_mobile">โทร.มือถือ</option>
+</select>
+<input type="text" name="searchValue" [(ngModel)]="searchValue">
+<button (click)="getUser()">Process</button>
 
 <clr-datagrid [clrDgLoading]="loading">
   <clr-dg-column [clrDgField]="'username'">Username</clr-dg-column>

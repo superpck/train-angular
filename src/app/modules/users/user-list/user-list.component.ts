@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-user-list',
@@ -7,7 +8,7 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-  searchColumn = '';
+  searchColumn = 'fname';
   searchValue = '';
   usersList: any = [];
   loading = false;
@@ -15,14 +16,15 @@ export class UserListComponent implements OnInit {
   modalEdit = false;
 
   constructor(
-    private usersService: UsersService
+    private usersService: UsersService,
+    private alert: AlertService
   ) { }
 
   ngOnInit(): void {
     this.getUser();
   }
 
-  async onEdit(row){
+  async onEdit(row) {
     this.currentUser = Object.assign({}, row);
     this.currentUser.password = '';
 
@@ -30,11 +32,11 @@ export class UserListComponent implements OnInit {
     this.modalEdit = true;
   }
 
-  async onDelete(row){
+  async onDelete(row) {
     this.currentUser = Object.assign({}, row);
   }
 
-  async onSave(){
+  async onSave() {
     if (!this.currentUser.password) {
       delete this.currentUser.password;
     }
@@ -45,13 +47,14 @@ export class UserListComponent implements OnInit {
     await this.getUser();
   }
 
-  async getUser(){
+  async getUser() {
     this.loading = true;
     const result: any = await this.usersService.getUsers(this.searchColumn, this.searchValue);
-    if (result.statusCode == 200) {
+    if (result.statusCode == 200 && result.rows.length) {
       this.usersList = result.rows;
     } else {
       this.usersList = [];
+      this.alert.error(this.searchColumn + '=' + this.searchValue, 'ไม่พบข้อมูล');
     }
     this.loading = false;
   }

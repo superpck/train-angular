@@ -13,6 +13,7 @@ import { UsersService } from './services/users.service';
 import { AlertService } from './services/alert.service';
 import { LoginModule } from './modules/login/login.module';
 import { environment } from 'src/environments/environment';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { environment } from 'src/environments/environment';
     BrowserAnimationsModule,
     MainModule, UsersModule,
     HttpClientModule,
-    LoginModule
+    LoginModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     UsersService,
