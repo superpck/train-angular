@@ -24,8 +24,23 @@ export class UserListComponent implements OnInit {
     this.getUser();
   }
 
-  async onEdit(row) {
-    this.currentUser = Object.assign({}, row);
+  async onEdit(row = null) {
+    if (row) {
+      this.currentUser = Object.assign({}, row);
+    } else {
+      this.currentUser = {
+        uid: 0,
+        prename: '',
+        fname: '',
+        lname: '',
+        username: '',
+        email: '',
+        tel_office: null,
+        tel_mobile: null,
+        password1: null,
+        password2: null,
+      };
+    }
     this.currentUser.password = '';
 
     console.log(this.currentUser);
