@@ -20,6 +20,7 @@
   <clr-dg-column [clrDgField]="'fname'">ชื่อ-สกุล</clr-dg-column>
   <clr-dg-column [clrDgField]="'email'">email</clr-dg-column>
   <clr-dg-column [clrDgField]="'tel_mobile'">โทร</clr-dg-column>
+  <clr-dg-column>Confirm</clr-dg-column>
 
   <clr-dg-row *clrDgItems="let item of usersList" [clrDgItem]="item">
     <clr-dg-action-overflow>
@@ -30,6 +31,10 @@
     <clr-dg-cell>{{item.prename}}{{item.fname}} {{item.lname}}</clr-dg-cell>
     <clr-dg-cell>{{item.email}}</clr-dg-cell>
     <clr-dg-cell>{{item.tel_mobile}}</clr-dg-cell>
+    <clr-dg-cell>
+      <clr-icon *ngIf="!item.confirmed" shape="times-circle" class="is-error" (click)="confirmUser(item)"></clr-icon>
+      <clr-icon *ngIf="item.confirmed" shape="success-standard" class="is-success"></clr-icon>
+    </clr-dg-cell>
   </clr-dg-row>
 
   <clr-dg-footer>

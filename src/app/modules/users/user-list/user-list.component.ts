@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 import { AlertService } from 'src/app/services/alert.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-user-list',
@@ -55,6 +56,21 @@ export class UserListComponent implements OnInit {
         await this.getUser();
       } else {
         this.alert.error(deleteResult.message,'มีปัญหาการลบข้อมูล');
+      }
+    }
+  }
+
+  async confirmUser(row){
+    const answer: any = await this.alert.confirm(row.prename + row.fname + ' ' + row.lname, 'ต้องการยืนยันการใช้งาน?');
+    if (answer.value) {
+      const saveResult: any = await this.usersService.saveUsers({
+        uid: row.uid, confirmed: moment().format('YYYY-MM-DD')
+      });
+      if (saveResult.statusCode == 200) {
+        this.alert.success('','ยืนยันเรียบร้อย');
+        await this.getUser();
+      } else {
+        this.alert.error(saveResult.message,'มีปัญหาการบันทึกข้อมูล');
       }
     }
   }
