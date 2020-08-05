@@ -25,8 +25,18 @@
 
   <clr-dg-row *clrDgItems="let item of usersList" [clrDgItem]="item">
     <clr-dg-action-overflow>
-      <button class="action-item" (click)="onEdit(item)">Edit</button>
-      <button class="action-item" (click)="onDelete(item)">Delete</button>
+      <button class="action-item" (click)="onEdit(item)">
+        <clr-icon shape="note"></clr-icon> Edit
+      </button>
+      <button class="action-item" (click)="onDelete(item)">
+        <clr-icon shape="times"></clr-icon> Delete
+      </button>
+      <button *ngIf="!item.expired" class="action-item" (click)="expireUser(item)">
+        <clr-icon shape="shield-x"></clr-icon> ยกเลิกการใช้งาน
+      </button>
+      <button *ngIf="item.expired" class="action-item" (click)="expireUser(item)">
+        <clr-icon shape="assign-user"></clr-icon> ยกเลิกการ Expire user
+      </button>
     </clr-dg-action-overflow>
     <clr-dg-cell>{{item.username}}</clr-dg-cell>
     <clr-dg-cell>{{item.prename}}{{item.fname}} {{item.lname}}</clr-dg-cell>
