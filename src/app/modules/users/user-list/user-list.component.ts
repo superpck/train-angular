@@ -36,12 +36,11 @@ export class UserListComponent implements OnInit {
         username: '',
         email: '',
         tel_office: null,
-        tel_mobile: null,
-        password1: null,
-        password2: null,
+        tel_mobile: null
       };
     }
-    this.currentUser.password = '';
+    this.currentUser.password1 = '';
+    this.currentUser.password2 = '';
 
     console.log(this.currentUser);
     this.modalEdit = true;
@@ -52,14 +51,27 @@ export class UserListComponent implements OnInit {
   }
 
   async onSave() {
-    if (!this.currentUser.password) {
-      delete this.currentUser.password;
+    if (this.currentUser.uid == 0 && !this.currentUser.password1) {
+      this.alert.error('', 'กรุณาระบุรหัสผ่าน');
+      return;
     }
+
+    if (!this.currentUser.password1) {
+      delete this.currentUser.password;
+    } else {
+      this.currentUser.password = this.currentUser.password1;
+    }
+    delete this.currentUser.password1;
+    delete this.currentUser.password2;
 
     const saveResult: any = await this.usersService.saveUsers(this.currentUser);
     console.log(saveResult);
-    this.modalEdit = false;
-    await this.getUser();
+    if (saveResult.statusCode == 200) {
+      this.modalEdit = false;
+      await this.getUser();
+    } else {
+      this.alert.error(saveResult.message, 'บันทึกผิดพลาด');
+    }
   }
 
   async getUser() {
