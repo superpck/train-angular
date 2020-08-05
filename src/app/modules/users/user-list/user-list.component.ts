@@ -47,7 +47,16 @@ export class UserListComponent implements OnInit {
   }
 
   async onDelete(row) {
-    this.currentUser = Object.assign({}, row);
+    const answer: any = this.alert.confirm(row.prename + row.fname + ' ' + row.lname, 'ยืนยันการลบข้อมูล');
+    if (answer.value) {
+      const deleteResult: any = await this.usersService.deleteUsers(row.uid);
+      if (deleteResult.statusCode == 200) {
+        this.alert.success('','ลบเรียบร้อย');
+        await this.getUser();
+      } else {
+        this.alert.error(deleteResult.message,'มีปัญหาการลบข้อมูล');
+      }
+    }
   }
 
   async onSave() {
