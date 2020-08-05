@@ -48,10 +48,8 @@ export class UserListComponent implements OnInit {
 
   async onDelete(row) {
     const answer: any = await this.alert.confirm(row.prename + row.fname + ' ' + row.lname, 'ยืนยันการลบข้อมูล');
-    console.log(answer);
     if (answer.value) {
       const deleteResult: any = await this.usersService.deleteUsers(row.uid);
-      console.log(deleteResult);
       if (deleteResult.statusCode == 200) {
         this.alert.success('','ลบเรียบร้อย');
         await this.getUser();
