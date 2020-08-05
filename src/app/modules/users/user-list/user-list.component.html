@@ -1,6 +1,6 @@
 <h1>ทะเบียนผู้ใช้งาน</h1>
 
-
+<hr>
 ค้นหา
 <select name="searchColumn" [(ngModel)]="searchColumn">
   <option value="fname">ชื่อ</option>
@@ -8,8 +8,12 @@
   <option value="tel_mobile">โทร.มือถือ</option>
 </select>
 <input type="text" name="searchValue" [(ngModel)]="searchValue">
-<button (click)="getUser()">Process</button>
-<button (click)="onEdit()">+ Add new user</button>
+<button (click)="getUser()">
+  <clr-icon shape="search"></clr-icon> Process
+</button>
+<button (click)="onEdit()">
+  <clr-icon shape="add-text"></clr-icon> Add new user
+</button>
 
 <clr-datagrid [clrDgLoading]="loading">
   <clr-dg-column [clrDgField]="'username'">Username</clr-dg-column>
@@ -67,11 +71,20 @@
     <br>วันที่เริ่มใช้งาน: <input type="date" name="date_valid" [(ngModel)]="currentUser.date_valid">
     <br>วันที่สิ้นสุดการใช้งาน: <input type="date" name="date_expire" [(ngModel)]="currentUser.date_expire">
 
-    <br>Password: <input type="password" name="password" [(ngModel)]="currentUser.password">
+    <clr-password-container>
+      <label>Password:</label>
+      <input clrPassword placeholder="Password please!" name="password1" [(ngModel)]="currentUser.password1" />
+    </clr-password-container>
+    <clr-password-container>
+      <label>ป้อนอีกครั้ง:</label>
+      <input clrPassword placeholder="Password please!" name="password2" [(ngModel)]="currentUser.password2" />
+    </clr-password-container>
 
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline" (click)="onSave()">บันทึก</button>
+    <button type="button"
+      [disabled]="!currentUser.username || !currentUser.fname || !currentUser.email || currentUser.password1!=currentUser.password2"
+      class="btn btn-outline" (click)="onSave()">บันทึก</button>
     <button type="button" class="btn btn-primary-outline" (click)="modalEdit = false">x ปิด</button>
   </div>
 </clr-modal>
