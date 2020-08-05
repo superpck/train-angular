@@ -52,25 +52,42 @@ export class UserListComponent implements OnInit {
     if (answer.value) {
       const deleteResult: any = await this.usersService.deleteUsers(row.uid);
       if (deleteResult.statusCode == 200) {
-        this.alert.success('','ลบเรียบร้อย');
+        this.alert.success('', 'ลบเรียบร้อย');
         await this.getUser();
       } else {
-        this.alert.error(deleteResult.message,'มีปัญหาการลบข้อมูล');
+        this.alert.error(deleteResult.message, 'มีปัญหาการลบข้อมูล');
       }
     }
   }
 
-  async confirmUser(row){
+  async confirmUser(row) {
     const answer: any = await this.alert.confirm(row.prename + row.fname + ' ' + row.lname, 'ต้องการยืนยันการใช้งาน?');
     if (answer.value) {
       const saveResult: any = await this.usersService.saveUsers({
         uid: row.uid, confirmed: moment().format('YYYY-MM-DD')
       });
       if (saveResult.statusCode == 200) {
-        this.alert.success('','ยืนยันเรียบร้อย');
+        this.alert.success('', 'ยืนยันเรียบร้อย');
         await this.getUser();
       } else {
-        this.alert.error(saveResult.message,'มีปัญหาการบันทึกข้อมูล');
+        this.alert.error(saveResult.message, 'มีปัญหาการบันทึกข้อมูล');
+      }
+    }
+  }
+
+  async expireUser(row) {
+    const title = row.expired ? 'ยกเลิกการ Expire?' : 'ต้องการยกเลิกการใช้งาน?';
+    const answer: any = await this.alert.confirm(row.prename + row.fname + ' ' + row.lname, title);
+    if (answer.value) {
+      const expired = row.expired ? null : moment().format('YYYY-MM-DD');
+      const saveResult: any = await this.usersService.saveUsers({
+        uid: row.uid, expired
+      });
+      if (saveResult.statusCode == 200) {
+        this.alert.success('', 'บันทึกเรียบร้อย');
+        await this.getUser();
+      } else {
+        this.alert.error(saveResult.message, 'มีปัญหาการบันทึกข้อมูล');
       }
     }
   }
